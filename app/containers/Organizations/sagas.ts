@@ -29,14 +29,14 @@ import api from 'utils/api'
 import { errorHandler } from 'utils/util' 
 
 export function* getOrganizations() {
-  // try {
-  //   const asyncData = yield call(request, api.organizations)
-  //   const organizations = asyncData.payload
-  //   yield put(OrganizationActions.organizationsLoaded(organizations))
-  // } catch (err) {
-  //   yield put(OrganizationActions.loadOrganizationsFail())
-  //   errorHandler(err)
-  // }
+  try {
+    const asyncData = yield call(request, api.organizations)
+    const organizations = asyncData.payload
+    yield put(OrganizationActions.organizationsLoaded(organizations))
+  } catch (err) {
+    yield put(OrganizationActions.loadOrganizationsFail())
+    errorHandler(err)
+  }
 }
 
 export function* addOrganization(action: OrganizationActionType) {

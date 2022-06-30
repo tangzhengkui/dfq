@@ -151,32 +151,32 @@ export function* addProjectRole (action: ProjectActionType) {
 
   const { projectId, roleIds, resolve } = action.payload
   const { addProjectRoleFail } = ProjectActions
-  // try {
-  //   const asyncData = yield call(request, {
-  //     method: 'post',
-  //     url: `${api.projects}/${projectId}/roles`,
-  //     data: roleIds
-  //   })
-  //   const result = asyncData.payload
-  //   resolve(result)
-  // } catch (err) {
-  //   yield put(addProjectRoleFail())
-  //   errorHandler(err)
-  // }
+  try {
+    const asyncData = yield call(request, {
+      method: 'post',
+      url: `${api.projects}/${projectId}/roles`,
+      data: roleIds
+    })
+    const result = asyncData.payload
+    resolve(result)
+  } catch (err) {
+    yield put(addProjectRoleFail())
+    errorHandler(err)
+  }
 }
 
 export function* getProjectDetail (action: ProjectActionType) {
-  // if (action.type !== ActionTypes.LOAD_PROJECT_DETAIL) { return }
+  if (action.type !== ActionTypes.LOAD_PROJECT_DETAIL) { return }
 
-  // const { id: projectId } = action.payload
-  // const { projectDetailLoaded } = ProjectActions
-  // try {
-  //   const asyncData = yield  call(request, `${api.projects}/${projectId}`)
-  //   const project = asyncData.payload
-  //   yield put(projectDetailLoaded(project))
-  // } catch (err) {
-  //   errorHandler(err)
-  // }
+  const { id: projectId } = action.payload
+  const { projectDetailLoaded } = ProjectActions
+  try {
+    const asyncData = yield  call(request, `${api.projects}/${projectId}`)
+    const project = asyncData.payload
+    yield put(projectDetailLoaded(project))
+  } catch (err) {
+    errorHandler(err)
+  }
 }
 
 export function* transferProject (action: ProjectActionType) {
@@ -357,14 +357,14 @@ export function* getProjectRoles (action: OrganizationActionType) {
 
   const { projectId } = action.payload
   const { projectRolesLoaded, loadProjectRolesFail } = OrganizationActions
-  // try {
-  //   const asyncData = yield call(request, `${api.projects}/${projectId}/roles`)
-  //   const results = asyncData.payload
-  //   yield put(projectRolesLoaded(results))
-  // } catch (err) {
-  //   yield put(loadProjectRolesFail())
-  //   errorHandler(err)
-  // }
+  try {
+    const asyncData = yield call(request, `${api.projects}/${projectId}/roles`)
+    const results = asyncData.payload
+    yield put(projectRolesLoaded(results))
+  } catch (err) {
+    yield put(loadProjectRolesFail())
+    errorHandler(err)
+  }
 }
 
 export function* excludeRole (action: ProjectActionType) {
